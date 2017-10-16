@@ -1,3 +1,7 @@
 agm-map {
   height: 400px;
 }
+
+.puntero{
+  cursor: pointer;
+}

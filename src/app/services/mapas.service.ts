@@ -5,6 +5,8 @@ import { Marcador } from '../interfaces/marcador.interface';
 export class MapasService {
 
   marcadores:Marcador[] = [];
+  latitudMarker:string;
+  longitudMarker:string;
 
   constructor() {
     let nuevoMarcador:Marcador={
@@ -21,7 +23,13 @@ export class MapasService {
 
   insertarMarcador( marcador:Marcador ){
     this.marcadores.push( marcador );
+
     this.guardarMarcadores();
+  }
+
+  borrarMarcador( idx:number ){
+      this.marcadores.splice(idx, 1);
+      this.guardarMarcadores();
   }
 
   guardarMarcadores(){
@@ -36,6 +44,5 @@ export class MapasService {
       this.marcadores = [];
     }
   }
-
 
 }

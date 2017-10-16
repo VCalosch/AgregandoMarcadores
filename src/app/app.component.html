@@ -1,5 +1,6 @@
 <h3 align="center">ProyectoPlayas</h3>
-
+<div class="row">
+<div class="col-sm-8">
 <agm-map
  [latitude]="latitud"
   [longitude]="longitud"
@@ -17,33 +18,52 @@
 
   <agm-info-window>
   <strong *ngIf="marcador.titulo">{{marcador.titulo}}</strong>
-  <p *ngIf="marcador.descripcion">{{marcador.descripcion}}</p>
 
+  <p *ngIf="marcador.descripcion"><br>{{marcador.descripcion}}</p>
+  <p>
+    <a (click)="_ms.borrarMarcador(i); marcadorSel=null;"
+        class="text-danger puntero"
+        >Borrar marcador</a>
+  </p>
   </agm-info-window>
 </agm-marker>
 </agm-map>
+</div>
 <br>
-
-<div *ngIf="marcadorSel">
-    <h2 align="center">Administrar Marcadores</h2>
+<div class="col">
+<div *ngIf="marcadorSel" class="form-group">
     <div class="form-group">
-      <label>Titulo</label>
+      <label>Título</label>
       <input  [(ngModel)]="marcadorSel.titulo"
               type="text"
               name="titulo"
               class="form-control">
     </div>
 
-    <div>
-      <label>Titulo</label>
-      <textarea [(ngModel)]="marcadorSel.titulo"
+    <div class="form-group">
+      <label>Descripción</label>
+      <textarea [(ngModel)]="marcadorSel.descripcion"
                 type="text"
-                name="titulo"
+                name="descripcion"
                 class="form-control"
                 rows="5">
                 </textarea>
     </div>
+
+    <div>
+        <label>Desplazar el marcador:</label>
+        <select [(ngModel)]="draggable"
+                  class="form-control"
+                  name="draggable"
+                  (change)="cambiarDraggable()">
+
+                  <option value="1">Si</option>
+                  <option value="0">No</option>
+        </select>
+    </div>
     <br>
     <button (click)="_ms.guardarMarcadores()"
-    type="button" class="btn btn-outline-primary btn-block">Guardar Cambios</button>
+    type="button" class="btn btn-outline-primary btn-block puntero">Guardar Cambios</button>
+</div>
+</div>
 </div>
