@@ -17,6 +17,7 @@ export class MapasService {
       draggable:true
     }
 
+
       this.marcadores.push( nuevoMarcador );
 
   }

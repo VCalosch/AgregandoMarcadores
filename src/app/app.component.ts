@@ -17,8 +17,6 @@ export class AppComponent {
   draggable:string="1";
 
   //variables del formulario
-  latitudMarker:string;
-  longitudMarker:string;
 
   constructor( public _ms:MapasService ){
     this._ms.cargarMarcadores();

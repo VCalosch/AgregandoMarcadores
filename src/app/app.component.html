@@ -1,69 +1,101 @@
 <h3 align="center">ProyectoPlayas</h3>
+<div class="container">
 <div class="row">
 <div class="col-sm-8">
 <agm-map
- [latitude]="latitud"
+  [latitude]="latitud"
   [longitude]="longitud"
   [zoom]="zoom"
   (mapClick)="clickMapa( $event )">
 
 
   <agm-marker *ngFor="let marcador of _ms.marcadores; let i = index"
-  [latitude]="marcador.latitud"
-  [longitude]="marcador.longitud"
-  [markerDraggable]="marcador.draggable"
-  (markerClick)="clickMarcador( marcador, i )"
-  (dragEnd)="dragEndMarcador( marcador, $event )">
-
+      [latitude]="marcador.latitud"
+      [longitude]="marcador.longitud"
+      [markerDraggable]="marcador.draggable"
+      (markerClick)="clickMarcador( marcador, i )"
+      (dragEnd)="dragEndMarcador( marcador, $event )">
 
   <agm-info-window>
   <strong *ngIf="marcador.titulo">{{marcador.titulo}}</strong>
-
-  <p *ngIf="marcador.descripcion"><br>{{marcador.descripcion}}</p>
-  <p>
-    <a (click)="_ms.borrarMarcador(i); marcadorSel=null;"
-        class="text-danger puntero"
-        >Borrar marcador</a>
-  </p>
+      <p *ngIf="marcador.descripcion"><br>{{marcador.descripcion}}</p>
+      <p>
+        <a (click)="_ms.borrarMarcador(i); marcadorSel=null;"
+            class="text-danger puntero"
+            >Borrar marcador</a>
+      </p>
   </agm-info-window>
+
 </agm-marker>
+
 </agm-map>
 </div>
+
 <br>
+
 <div class="col">
-<div *ngIf="marcadorSel" class="form-group">
-    <div class="form-group">
-      <label>Título</label>
-      <input  [(ngModel)]="marcadorSel.titulo"
-              type="text"
-              name="titulo"
-              class="form-control">
-    </div>
-
-    <div class="form-group">
-      <label>Descripción</label>
-      <textarea [(ngModel)]="marcadorSel.descripcion"
+  <div *ngIf="marcadorSel" class="form-group">
+      <div class="form-group">
+        <label>Título</label>
+        <input  [(ngModel)]="marcadorSel.titulo"
                 type="text"
-                name="descripcion"
-                class="form-control"
-                rows="5">
-                </textarea>
-    </div>
+                name="titulo"
+                class="form-control">
+      </div>
 
-    <div>
-        <label>Desplazar el marcador:</label>
-        <select [(ngModel)]="draggable"
+      <div class="form-group">
+        <label>Descripción</label>
+        <textarea [(ngModel)]="marcadorSel.descripcion"
+                  type="text"
+                  name="descripcion"
                   class="form-control"
-                  name="draggable"
-                  (change)="cambiarDraggable()">
+                  rows="5">
+                  </textarea>
+      </div>
 
-                  <option value="1">Si</option>
-                  <option value="0">No</option>
-        </select>
+      <div>
+          <label>Desplazar el marcador:</label>
+          <select [(ngModel)]="draggable"
+                    class="form-control"
+                    name="draggable"
+                    (change)="cambiarDraggable()">
+
+                    <option value="1">Si</option>
+                    <option value="0">No</option>
+          </select>
     </div>
     <br>
     <button (click)="_ms.guardarMarcadores()"
     type="button" class="btn btn-outline-primary btn-block puntero">Guardar Cambios</button>
 </div>
 </div>
+</div>
+</div>
+<br><br>
+<!--Agregando Marcador ingresando las coordenadas manualmente-->
+<div class="container">
+  <div class="row">
+      <div class="form-group col-sm-10" >
+        <strong>Agregando un marcador Manualmente</strong>
+        <br><br>
+        <!---->
+        <label for="usr">Latitud:</label>
+        <div class="col-3">
+            <input type="text" class="form-control">
+        </div>
+        <label for="usr">Longitud:</label>
+        <div class="col-3">
+            <input type="text" class="form-control">
+            <br>
+
+        <button (click)="_ms.guardarMarcadores()"
+                type="button"
+                class="btn btn-outline-primary btn-block puntero">
+                Guardar</button>
+        </div>
+
+
+
+    </div>
+  </div>
 </div>
